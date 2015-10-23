@@ -686,7 +686,7 @@ msgstr "Javna domena"
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/bittorrent/CopyrightLicenseSelectorPanel.java:96
 msgid "Choose a Copyright License for this work"
-msgstr "Odaberite autorska prava licence za ovaj posao"
+msgstr "Odaberite autorska prava licence za ovaj rad"
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/bittorrent/CopyrightLicenseSelectorPanel.java:99
 msgid ""
@@ -702,11 +702,11 @@ msgstr "Ime autora"
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/bittorrent/CopyrightLicenseSelectorPanel.java:103
 msgid "The name of the creator or creators of this work."
-msgstr "Ime tvor(a)ca ovog posla"
+msgstr "Ime tvor(a)ca ovog rada"
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/bittorrent/CopyrightLicenseSelectorPanel.java:105
 msgid "Work's Title"
-msgstr "Naslov posla"
+msgstr "Naslov rada"
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/bittorrent/CopyrightLicenseSelectorPanel.java:107
 msgid ""
@@ -729,7 +729,8 @@ msgid ""
 "The Content Creator's website to give attribution about this work if shared "
 "by others."
 msgstr ""
-"Stranica stvoritelja sadržaja pripisuje ovom rad ako je dijeljen sa drugima."
+"Stranica stvoritelja sadržaja pripisuje ovom rad ako je dijeljen "
+"sa drugima."
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/bittorrent/CopyrightLicenseSelectorPanel.java:124
 msgid ""
@@ -774,8 +775,8 @@ msgid ""
 "You allow others to distribute derivative works only under a license "
 "identical to the license that governs your work."
 msgstr ""
-"Vi dozvoljavate ostalima da distribuiraju posao samo pod licencom identičnom "
-"licenci koja uređuje vas posao."
+"Vi dozvoljavate ostalima da distribuiraju rad samo pod licencom identičnom "
+"licenci koja uređuje vaš rad."
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/bittorrent/CopyrightLicenseSelectorPanel.java:147
 msgid ""
@@ -810,7 +811,7 @@ msgid ""
 "You can copy, modify, distribute and perform the work, even for commercial "
 "purposes, all without asking permission."
 msgstr ""
-"Možete kopirati, podesiti, distribuirati i obaviti posao, čak i za "
+"Možete kopirati, podesiti, distribuirati i izvoditi rad, čak i za "
 "komercijalne upotrebe, sve bez pitanja za dozvolu."
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/bittorrent/CopyrightLicenseSelectorPanel.java:467
@@ -1103,7 +1104,7 @@ msgid ""
 "contributions for this work."
 msgstr ""
 "Ja sam stvoritelj sadržaja ili ja imam pravo sakupiti financijske doprinose "
-"za ovaj posao."
+"za ovaj rad."
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/bittorrent/PaymentOptionsPanel.java:43
 msgid ""
@@ -1377,16 +1378,16 @@ msgstr "Instaliraj"
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/components/slides/SlideControlsOverlay.java:282
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/components/slides/SlideControlsOverlay.java:283
 msgid "Video Preview"
-msgstr "Pretpregled videa"
+msgstr "Pregled videa"
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/components/slides/SlideControlsOverlay.java:284
 msgid "Play Video preview of"
-msgstr "Sviraj video pretpregled od"
+msgstr "Sviraj video pregled od"
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/components/slides/SlideControlsOverlay.java:301
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/components/slides/SlideControlsOverlay.java:302
 msgid "Audio Preview"
-msgstr "Zvučni pretpregled"
+msgstr "Zvučni pregled"
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/frostwire/gui/components/slides/SlideControlsOverlay.java:303
 msgid "Play Audio preview of"
@@ -4709,7 +4710,7 @@ msgstr "Sviraj sa materinjim izvođačem medija"
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/limegroup/gnutella/gui/options/panes/PlayerPaneItem.java:42
 msgid "Play search result video previews with internal player"
-msgstr "Sviraj video pret-preglede rezultata pretrage sa internim izvođačem"
+msgstr "Sviraj video preglede rezultata pretrage sa internim izvođačem"
 
 #: /Users/gubatron/workspace.frostwire/frostwire-desktop/src/com/limegroup/gnutella/gui/options/panes/PopupsPaneItem.java:19
 msgid "FrostWire Popups"
