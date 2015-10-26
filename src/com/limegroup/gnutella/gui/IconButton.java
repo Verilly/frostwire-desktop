@@ -22,6 +22,8 @@ public class IconButton extends JButton {
     private String rollOverIconName;
     private boolean horizontalText;
     private boolean useTransparentBackground;
+    private int resizedWidth = -1;
+    private int resizedHeight = -1;
     
 	/**
 	 * The super constructors of JButton call {@link #updateUI()} before we
@@ -67,6 +69,13 @@ public class IconButton extends JButton {
         this.iconOnly = true;
         initialized = true;
         useTransparentBackground = true;
+        updateButton();
+    }
+
+    public IconButton(String iconName, int w, int h) {
+        this(iconName);
+        resizedWidth = w;
+        resizedHeight = h;
         updateButton();
     }
 
@@ -169,11 +178,17 @@ public class IconButton extends JButton {
             setOpaque(true);
             
         } else {
+            if (resizedWidth > 0 && resizedHeight > 0) {
+                icon = ImageManipulator.resize(icon, resizedWidth, resizedHeight);
+            }
             setIcon(icon);
             
             Icon rollover = IconManager.instance().getIconForButton(rollOverIconName);
             if (rollover == null) {
                 rollover = IconManager.instance().getRolloverIconForButton(iconName);
+            }
+            if (resizedHeight > 0 && resizedWidth > 0) {
+                rollover = ImageManipulator.resize(rollover, resizedWidth, resizedHeight);
             }
             setRolloverIcon(rollover);
             
