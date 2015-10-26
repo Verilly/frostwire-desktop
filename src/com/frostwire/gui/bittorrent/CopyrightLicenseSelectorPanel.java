@@ -18,31 +18,22 @@
 
 package com.frostwire.gui.bittorrent;
 
-import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
-
-import net.miginfocom.swing.MigLayout;
-
-import com.frostwire.gui.bittorrent.LicenseToggleButton.LicenseIcon;
-import com.frostwire.licences.License;
 import com.frostwire.bittorrent.CopyrightLicenseBroker;
 import com.frostwire.bittorrent.CopyrightLicenseBroker.LicenseCategory;
+import com.frostwire.gui.bittorrent.LicenseToggleButton.LicenseIcon;
+import com.frostwire.licences.License;
 import com.limegroup.gnutella.gui.GUIMediator;
 import com.limegroup.gnutella.gui.GUIUtils;
 import com.limegroup.gnutella.gui.I18n;
 import com.limegroup.gnutella.gui.LimeTextField;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class CopyrightLicenseSelectorPanel extends JPanel {
@@ -141,7 +132,7 @@ public class CopyrightLicenseSelectorPanel extends JPanel {
         cddlButton = new LicenseToggleButton(LicenseIcon.OPENSOURCE, "CDDL-1.0", "Common Development and Distribution License (CDDL-1.0)", false, true);
         eclipseButton = new LicenseToggleButton(LicenseIcon.OPENSOURCE, "EPL-1.0", "Eclipse Public License, Vesion 1.0 (EPL-1.0)", false, true);
 
-        openSourceLicenseButtons = new LinkedList<LicenseToggleButton>();
+        openSourceLicenseButtons = new LinkedList<>();
         initOpenSourceButtonList();
         
         publicDomainButton = new LicenseToggleButton(LicenseIcon.PUBLICDOMAIN, "Public Domain Mark 1.0", I18n.tr("This work has been identified as being free of known restrictions under copyright law, including all related and neighboring rights."),true,true);
@@ -525,8 +516,8 @@ public class CopyrightLicenseSelectorPanel extends JPanel {
             cc0Button.setSelected(false);
             updatePickedLicenseLabel();
         } else {
-            ndButton.setSelected(rightfulUseConfirmed);
-            saButton.setSelected(rightfulUseConfirmed);
+            ndButton.setSelected(false);
+            saButton.setSelected(false);
         }
     }
 

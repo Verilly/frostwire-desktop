@@ -20,13 +20,23 @@ package com.limegroup.gnutella.gui.init;
 import com.frostwire.gui.bittorrent.TorrentSaveFolderComponent;
 import com.frostwire.gui.bittorrent.TorrentSeedingSettingComponent;
 import com.frostwire.gui.theme.ThemeMediator;
+import com.limegroup.gnutella.gui.GUIMediator;
 import com.limegroup.gnutella.gui.I18n;
+import com.limegroup.gnutella.gui.IconButton;
+import com.limegroup.gnutella.gui.ImageManipulator;
+import com.limegroup.gnutella.gui.util.Constants;
 import com.limegroup.gnutella.settings.LibrarySettings;
 import com.limegroup.gnutella.settings.SharingSettings;
+import net.miginfocom.swing.MigLayout;
 import org.limewire.util.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.ImageConsumer;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,98 +48,34 @@ import java.util.List;
  * @author aldenml
  */
 class SocialRecommendationsWindow extends SetupWindow {
-
-    private static final String LEARN_MORE_URL = "http://support.frostwire.com/hc/en-us/articles/200302295-What-is-seeding-";
-
-    private TorrentSaveFolderComponent _torrentSaveFolderComponent;
-    private TorrentSeedingSettingComponent _torrentSeedingSettingComponent;
-
-    /**
-     * Creates the window and its components
-     */
     SocialRecommendationsWindow(SetupManager manager) {
-        super(manager, I18n.tr("BitTorrent Sharing Settings"), describeText(), LEARN_MORE_URL);
-    }
-
-    private static String describeText() {
-        return I18n.tr("Choose a folder where files downloaded from the BitTorrent network should be saved to.\nPlease select if you want to \"Seed\" or to not \"Seed\" finished downloads. The link below has more information about \"Seeding\".");
+        super(manager, I18n.tr("You're done, join us."),
+                I18n.tr("Join the FrostWire community and help us spread FrostWire to continue to have a free and uncensored Internet. Stay in touch through social media channels for quick feedback, support, ideas or just to say hello."));
     }
 
     protected void createWindow() {
         super.createWindow();
 
-        JPanel mainPanel = new JPanel(new GridBagLayout());
-
-        // "Saved Torrent Data" container
-        _torrentSaveFolderComponent = new TorrentSaveFolderComponent(true);
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.weightx = 1;
-        gbc.weighty = 0.5;
-        mainPanel.add(_torrentSaveFolderComponent, gbc);
-        _torrentSaveFolderComponent.putClientProperty(ThemeMediator.SKIN_PROPERTY_DARK_BOX_BACKGROUND, Boolean.TRUE);
-
-        //Torrent Seeding container
-        _torrentSeedingSettingComponent = new TorrentSeedingSettingComponent(false, true);
-        gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.weightx = 1;
-        gbc.weighty = 0.5;
-
-        mainPanel.add(_torrentSeedingSettingComponent, gbc);
-        _torrentSeedingSettingComponent.putClientProperty(ThemeMediator.SKIN_PROPERTY_DARK_BOX_BACKGROUND, Boolean.TRUE);
-        _torrentSeedingSettingComponent.updateUI();
+        JPanel mainPanel = new JPanel(new MigLayout("fillx, insets 0, gap 4px",
+                "[]"));
+        mainPanel.add(new IconButton("SOCIAL_MEDIA_CHECK", 150, 150), "growx, center, span, wrap");
+        mainPanel.add(new JLabel(I18n.tr("<html><b>Keep in Touch!</b></html>")),"center, span, wrap, height 40px");
+        int socialButtonW = 100;
+        mainPanel.add(createSocialButton("SOCIAL_WIZARD_FACEBOOK", Constants.FACEBOOK_FROSTWIRE_URL, socialButtonW), "alignx center");
+        mainPanel.add(createSocialButton("SOCIAL_WIZARD_REDDIT"  , Constants.REDDIT_FROSTWIRE_URL  , socialButtonW), "alignx center");
+        mainPanel.add(createSocialButton("SOCIAL_WIZARD_TWITTER" , Constants.TWITTER_FROSTWIRE_URL , socialButtonW), "alignx center");
 
         setSetupComponent(mainPanel);
     }
 
-    /**
-     * Overrides applySettings method in SetupWindow.
-     * <p/>
-     * This method applies any settings associated with this setup window.
-     */
-    public void applySettings(boolean loadCoreComponents) throws ApplySettingsException {
-        List<String> errors = new ArrayList<String>(2);
-
-        applyTorrentDataSaveFolderSettings(errors);
-
-        applyTorrentSeedingSettings(errors);
-
-        if (!errors.isEmpty()) {
-            throw new ApplySettingsException(StringUtils.explode(errors, "\n\n"));
-        }
-    }
-
-    private void applyTorrentSeedingSettings(List<String> errors) {
-        if (!_torrentSeedingSettingComponent.hasOneBeenSelected()) {
-            errors.add("<html><p>" + I18n.tr("You forgot to select your finished downloads \"Seeding\" setting.") + "</p>\n" +
-                    "<p></p><p align=\"right\"><a href=\"http://support.frostwire.com/hc/en-us/articles/200302295-What-is-seeding-\">" +
-                    I18n.tr("What is \"Seeding\"?") +
-                    "</a></p></html>");
-            return;
-        }
-
-        SharingSettings.SEED_FINISHED_TORRENTS.setValue(_torrentSeedingSettingComponent.wantsSeeding());
-    }
-
-    private void applyTorrentDataSaveFolderSettings(List<String> errors) {
-        File folder = new File(_torrentSaveFolderComponent.getTorrentSaveFolderPath());
-        if (folder.exists() && folder.isDirectory() && folder.canWrite()) {
-            SharingSettings.TORRENT_DATA_DIR_SETTING.setValue(folder);
-        } else {
-            if (!folder.mkdirs()) {
-                errors.add(I18n.tr("FrostWire could not create the Torrent Data Folder {0}", folder));
-            } else {
-                SharingSettings.TORRENT_DATA_DIR_SETTING.setValue(folder);
+    private IconButton createSocialButton(String iconName, final String clickURL, int height) {
+        IconButton button = new IconButton(iconName,height,height);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GUIMediator.openURL(clickURL);
             }
-        }
-
-        // setup initial library folders here
-        LibrarySettings.setupInitialLibraryFolders();
+        });
+        return button;
     }
-
 }
