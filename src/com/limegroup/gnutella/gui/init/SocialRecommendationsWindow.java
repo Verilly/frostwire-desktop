@@ -49,7 +49,7 @@ import java.util.List;
  */
 class SocialRecommendationsWindow extends SetupWindow {
     SocialRecommendationsWindow(SetupManager manager) {
-        super(manager, I18n.tr("You're done, join us."),
+        super(manager, I18n.tr("Join us."),
                 I18n.tr("Join the FrostWire community and help us spread FrostWire to continue to have a free and uncensored Internet. Stay in touch through social media channels for quick feedback, support, ideas or just to say hello."));
     }
 

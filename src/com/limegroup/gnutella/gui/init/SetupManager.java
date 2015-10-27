@@ -152,6 +152,10 @@ public class SetupManager {
             windows.add(new AssociationsWindow(this));
         }
 
+        if (windows.size() > 0) {
+            windows.add(new SocialRecommendationsWindow(this));
+        }
+
         //THIS HAS TO GO LAST
         IntentWindow intentWindow = new IntentWindow(this);
         if (!intentWindow.isConfirmedWillNot()) {
@@ -159,8 +163,6 @@ public class SetupManager {
         } else {
             UXStats.instance().log(UXAction.CONFIGURATION_WIZARD_AFTER_UPDATE);
         }
-
-        windows.add(new SocialRecommendationsWindow(this));
 
         // Nothing to install?.. Begone.
         if (windows.size() == 0) {
