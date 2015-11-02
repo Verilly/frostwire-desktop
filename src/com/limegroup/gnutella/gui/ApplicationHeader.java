@@ -17,37 +17,6 @@
 
 package com.limegroup.gnutella.gui;
 
-import java.awt.CardLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Map;
-
-import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.plaf.ComponentUI;
-import javax.swing.text.BadLocationException;
-
-import net.miginfocom.swing.MigLayout;
-
 import com.frostwire.gui.library.LibraryMediator;
 import com.frostwire.gui.player.MediaPlayerComponent;
 import com.frostwire.gui.searchfield.GoogleSearchField;
@@ -66,6 +35,14 @@ import com.limegroup.gnutella.gui.search.SearchInformation;
 import com.limegroup.gnutella.gui.search.SearchMediator;
 import com.limegroup.gnutella.settings.SearchSettings;
 import com.limegroup.gnutella.util.URLDecoder;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.text.BadLocationException;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Map;
 
 /**
  * 
@@ -101,9 +78,6 @@ public final class ApplicationHeader extends JPanel implements RefreshListener {
     private final Image headerButtonBackgroundUnselected;
 
     private LogoPanel logoPanel;
-    
-    private ImageIcon chatButtonImage;
-    private JRadioButton chatButton;
 
     private JLabel updateButton;
     private ImageIcon updateImageButtonOn;
@@ -115,7 +89,7 @@ public final class ApplicationHeader extends JPanel implements RefreshListener {
     private final JPanel searchPanels;
 
     public ApplicationHeader(Map<Tabs, Tab> tabs) {
-        setMinimumSize(new Dimension(1000, 54));
+        setMinimumSize(new Dimension(1100, 54));
         setLayout(new MigLayout("ins 0, ay 50%, filly,", "[][][grow][][]"));
 
         headerButtonBackgroundSelected = GUIMediator.getThemeImage("selected_header_button_background").getImage();
@@ -143,7 +117,7 @@ public final class ApplicationHeader extends JPanel implements RefreshListener {
         };
         
         searchPanels = createSearchPanel();
-        add(searchPanels, "w 240px!, gapright 10px, gapleft 5px");
+        add(searchPanels, "w 370px!, gapright 10px, gapleft 5px");
 
         //The Chat Tab is not a real Tab, it's a button, it's creation is done inside this method.
         addTabButtons(tabs);
@@ -184,7 +158,7 @@ public final class ApplicationHeader extends JPanel implements RefreshListener {
 
     private void initCloudSearchField() {
         cloudSearchField.addActionListener(new SearchListener());
-        cloudSearchField.setPrompt(I18n.tr("Search or enter URL"));
+        cloudSearchField.setPrompt(I18n.tr("Search or enter a YouTube/Soundcloud URL"));
         Font origFont = cloudSearchField.getFont();
         Font newFont = origFont.deriveFont(origFont.getSize2D() + 2f);
         cloudSearchField.setFont(newFont);
@@ -215,51 +189,6 @@ public final class ApplicationHeader extends JPanel implements RefreshListener {
                 UpdateMediator.instance().showUpdateMessage();
             }
         });
-    }
-    
-    private void createChatButton() {
-        chatButtonImage = GUIMediator.getThemeImage("chat_tab");
-
-
-        chatButton = new JRadioButton(I18n.tr("Chat"));
-        Dimension d = new Dimension(65, 55);
-        Font buttonFont = new Font("Helvetica", Font.BOLD, 10);
-        
-        chatButton.setFont(buttonFont);
-        chatButton.setIcon(chatButtonImage);
-        chatButton.setPressedIcon(chatButtonImage);
-        chatButton.setSelectedIcon(chatButtonImage);
-        chatButton.setRolloverIcon(chatButtonImage);
-        chatButton.setRolloverSelectedIcon(chatButtonImage);
-        chatButton.setVisible(true);
-        chatButton.setSize(d);
-        chatButton.setPreferredSize(d);
-        chatButton.setMinimumSize(d);
-        chatButton.setMaximumSize(d);
-        chatButton.setBorder(null);
-        chatButton.setBorderPainted(false);
-        chatButton.setFocusPainted(false);
-        chatButton.setContentAreaFilled(false);
-        chatButton.setOpaque(false);
-        chatButton.setToolTipText(I18n.tr("Show our community chat"));
-        chatButton.setHorizontalTextPosition(SwingConstants.CENTER);
-        chatButton.setVerticalTextPosition(JLabel.BOTTOM);
-        chatButton.setHorizontalAlignment(SwingConstants.CENTER);
-        chatButton.setForeground(ThemeMediator.TAB_BUTTON_FOREGROUND_COLOR);
-
-        chatButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                GUIMediator.openURL("http://www.frostwire.com/chat");
-                UXStats.instance().log(UXAction.MISC_CHAT_OPENED_IN_BROWSER);
-            }
-        });
-        
-    }
-
-
-    public LogoPanel getLogoPanel() {
-        return logoPanel;
     }
 
     private void addTabButtons(final Map<Tabs, Tab> tabs) {
@@ -318,11 +247,6 @@ public final class ApplicationHeader extends JPanel implements RefreshListener {
             button.setSelected(t.equals(GUIMediator.Tabs.SEARCH));
         }
         
-        //CHAT BUTTON
-        createChatButton();
-        buttonContainer.add(chatButton);
-        buttonContainer.add(ThemeMediator.createAppHeaderSeparator(), "growy, w 0px");
-
         add(buttonContainer, "");
     }
     

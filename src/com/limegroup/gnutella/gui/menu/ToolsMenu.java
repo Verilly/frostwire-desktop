@@ -19,6 +19,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
 
+import com.frostwire.uxstats.UXAction;
+import com.frostwire.uxstats.UXStats;
 import org.limewire.util.OSUtils;
 
 import com.frostwire.gui.updates.UpdateMediator;
@@ -47,6 +49,8 @@ final class ToolsMenu extends AbstractMenu {
         super(I18n.tr("&Tools"));
 
         this.updateAction = new UpdateAction();
+
+        addMenuItem(new OpenChatAction());
 
         if (OSUtils.isMacOSX() || OSUtils.isWindows()) {
             addMenuItem(new RebuildiTunesPlaylist());
@@ -136,6 +140,20 @@ final class ToolsMenu extends AbstractMenu {
             putValue(NAME, text);
             putValue(LONG_DESCRIPTION, text);
             setEnabled(enabled);
+        }
+    }
+
+    private static class OpenChatAction extends AbstractAction {
+
+        public OpenChatAction() {
+            super(I18n.tr("Chat"));
+            putValue(LONG_DESCRIPTION, I18n.tr("Show our community chat"));
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            GUIMediator.openURL("http://www.frostwire.com/chat");
+            UXStats.instance().log(UXAction.MISC_CHAT_OPENED_IN_BROWSER);
         }
     }
 }
