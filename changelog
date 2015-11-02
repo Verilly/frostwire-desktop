@@ -5,8 +5,9 @@ frostwire (6.1.6) stable; urgency=high
   * Fixes BTJunkie search.
   * Fixes TorLock search.
   * Updates to Spanish and Romanian translations.
+  * Chat button on header moved to Tools menu. More space for search bar.
 	
- -- FrostWire Team <contact@frostwire.com>  Oct, 25 Sep 2015 21:18:10 -0500
+ -- FrostWire Team <contact@frostwire.com>  Nov, 02 Sep 2015 13:04:00 -0500
 
 frostwire (6.1.5) stable; urgency=high
   * New http engine based on okhttp, uses pooled connections, less threads,
