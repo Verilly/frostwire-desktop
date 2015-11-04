@@ -1,4 +1,4 @@
-# This repository is now deprecated.
+# This repository has been phased out.
 
 We've changed our code repository structure to a monorepo which contains our android, desktop and common sources.
 
